@@ -1,0 +1,8 @@
+D:\VS\OperatingSystem\MaterialSkin\bin\Debug\MaterialSkin.dll
+D:\VS\OperatingSystem\MaterialSkin\bin\Debug\MaterialSkin.pdb
+D:\VS\OperatingSystem\MaterialSkin\obj\Debug\MaterialSkin.csprojResolveAssemblyReference.cache
+D:\VS\OperatingSystem\MaterialSkin\obj\Debug\MaterialSkin.Properties.Resources.resources
+D:\VS\OperatingSystem\MaterialSkin\obj\Debug\MaterialSkin.csproj.GenerateResource.Cache
+D:\VS\OperatingSystem\MaterialSkin\obj\Debug\MaterialSkin.csproj.CoreCompileInputs.cache
+D:\VS\OperatingSystem\MaterialSkin\obj\Debug\MaterialSkin.dll
+D:\VS\OperatingSystem\MaterialSkin\obj\Debug\MaterialSkin.pdb

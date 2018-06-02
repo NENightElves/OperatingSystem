@@ -2,10 +2,10 @@ D:\VS\OperatingSystem\OperatingSystem\bin\Debug\OperatingSystem.exe.config
 D:\VS\OperatingSystem\OperatingSystem\bin\Debug\OperatingSystem.exe
 D:\VS\OperatingSystem\OperatingSystem\bin\Debug\OperatingSystem.pdb
 D:\VS\OperatingSystem\OperatingSystem\bin\Debug\MaterialSkin.dll
+D:\VS\OperatingSystem\OperatingSystem\bin\Debug\MaterialSkin.pdb
 D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.csprojResolveAssemblyReference.cache
 D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.Properties.Resources.resources
 D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.csproj.GenerateResource.Cache
 D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.csproj.CoreCompileInputs.cache
 D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.exe
 D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.pdb
-D:\VS\OperatingSystem\OperatingSystem\obj\Debug\OperatingSystem.Form1.resources
