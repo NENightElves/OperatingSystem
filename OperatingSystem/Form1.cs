@@ -146,5 +146,45 @@ namespace OperatingSystem
             materialListView2.EnsureVisible(materialListView2.Items.Count - 1);
 
         }
+
+        private void materialFlatButton6_Click(object sender, EventArgs e)
+        {
+            materialListView2.Clear();
+            materialListView2.Columns.Add("PAGE");
+            materialListView2.Columns[0].Width = 80;
+            materialListView2.Columns.Add("INT");
+            materialListView2.Columns[1].Width = 70;
+            materialListView2.Columns.Add("OPAGE");
+            materialListView2.Columns[2].Width = 90;
+            if (checkText(materialSingleLineTextField2.Text) == false)
+            {
+                materialLabel1.Text = "ERROR PAGE SIZE";
+                return;
+            }
+            if (materialListView1.Items.Count <= 0)
+            {
+                materialLabel1.Text = "ERROR PAGE LENGTH";
+                return;
+            }
+            int N = int.Parse(materialSingleLineTextField2.Text);
+            int[] P = new int[materialListView1.Items.Count];
+            int i, j;
+            for (i = 0; i < N; i++)
+                materialListView2.Columns.Add(i + 1 + "");
+            for (i = 0; i < P.Length; i++)
+                P[i] = int.Parse(materialListView1.Items[i].Text);
+            PageReplacement pageReplacementCLOCK = new PageReplacement(N, P);
+            pageReplacementCLOCK.pageReplacementCLOCK();
+            for (i = 0; i < P.Length; i++)
+            {
+                materialListView2.Items.Add(parseText(pageReplacementCLOCK.pages[i]));
+                materialListView2.Items[i].SubItems.Add(parseText(pageReplacementCLOCK.isInterrupt[i]));
+                materialListView2.Items[i].SubItems.Add(parseText(pageReplacementCLOCK.outPage[i]));
+                for (j = 0; j < N; j++)
+                    materialListView2.Items[i].SubItems.Add(parseText(pageReplacementCLOCK.pageList[i, j]));
+            }
+            materialLabel2.Text = $"SUMINT={pageReplacementCLOCK.sumInterrupt};PAGENUM={pageReplacementCLOCK.pageLength};SUFFIENT={pageReplacementCLOCK.percent}";
+            materialListView2.EnsureVisible(materialListView2.Items.Count - 1);
+        }
     }
 }

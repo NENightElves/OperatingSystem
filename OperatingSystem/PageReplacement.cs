@@ -22,24 +22,23 @@ namespace OperatingSystem
             pageLength = P.Length;
             pageSize = N;
             pages = P;
-            pageList = new int[pageLength,pageSize];
+            pageList = new int[pageLength, pageSize];
             outPage = new int[pageLength];
-            isInterrupt = new bool[pageLength];           
+            isInterrupt = new bool[pageLength];
         }
 
         public void pageReplacementFIFO()
         {
             sumInterrupt = 0;
-            int i,j;
+            int i, j;
             int location;
             bool f;
             outPage[0] = -1;
             isInterrupt[0] = false;
             for (i = 0; i < pageSize; i++)
-            {
                 pageList[0, i] = -1;
+            for(i=0;i<pageLength;i++)
                 outPage[i] = -1;
-            }
             pageList[0, 0] = pages[0];
             sumInterrupt++;
             isInterrupt[0] = true;
@@ -88,10 +87,9 @@ namespace OperatingSystem
             outPage[0] = -1;
             isInterrupt[0] = false;
             for (i = 0; i < pageSize; i++)
-            {
                 pageList[0, i] = -1;
+            for (i = 0; i < pageLength; i++)
                 outPage[i] = -1;
-            }
             pageList[0, 0] = pages[0];
             sumInterrupt++;
             isInterrupt[0] = true;
@@ -134,6 +132,62 @@ namespace OperatingSystem
             }
             percent = (double)sumInterrupt / (double)pageLength;
         }
+
+        public void pageReplacementCLOCK()
+        {
+            sumInterrupt = 0;
+            int i, j;
+            int location;
+            bool f;
+            int[] prior = new int[pageSize];
+            int max, maxi;
+            int tmp = 0;
+            outPage[0] = -1;
+            isInterrupt[0] = false;
+            for (i = 0; i < pageSize; i++)
+            {
+                pageList[0, i] = -1;
+                prior[i] = int.MaxValue;
+            }
+            for (i = 0; i < pageLength; i++)
+                outPage[i] = -1;
+            pageList[0, 0] = pages[0];
+            sumInterrupt++;
+            isInterrupt[0] = true;
+            prior[0] = 0;
+            for (i = 1; i < pages.Length; i++)
+            {
+                f = true;
+                location = -1;
+                for (j = 0; j < pageSize; j++)
+                {
+                    if (pageList[i - 1, j] == pages[i]) { f = false; tmp = j; }
+                    if (location == -1 && pageList[i - 1, j] == -1) location = j;
+                    pageList[i, j] = pageList[i - 1, j];
+                }
+                if (f)         //pageList is full
+                {
+                    sumInterrupt++;
+                    isInterrupt[i] = true;
+                    maxi = -1;
+                    max = int.MinValue;
+                    for (j = 0; j < pageSize; j++) if (max < prior[j]) { max = prior[j]; maxi = j; }
+                    if (pageList[i, maxi] != -1) outPage[i] = pageList[i, maxi];
+                    pageList[i, maxi] = pages[i];
+                    for (j = 0; j < pageSize; j++) if (prior[j] != int.MaxValue) prior[j]++;
+                    prior[maxi] = 0;
+                }
+                else
+                {
+                    outPage[i] = -1;
+                    isInterrupt[i] = false;
+                    for (j = 0; j < pageSize; j++) if (prior[j] != int.MaxValue) prior[j]++;
+                    prior[tmp] = 0;
+                }
+            }
+            percent = (double)sumInterrupt / (double)pageLength;
+        }
+
 
     }
 }
