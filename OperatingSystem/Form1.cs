@@ -186,5 +186,158 @@ namespace OperatingSystem
             materialLabel2.Text = $"SUMINT={pageReplacementCLOCK.sumInterrupt};PAGENUM={pageReplacementCLOCK.pageLength};SUFFIENT={pageReplacementCLOCK.percent}";
             materialListView2.EnsureVisible(materialListView2.Items.Count - 1);
         }
+
+        private void materialFlatButton12_Click(object sender, EventArgs e)
+        {
+            if (checkText(materialSingleLineTextField4.Text)) materialListView4.Items.Add(materialSingleLineTextField4.Text);
+            materialSingleLineTextField4.Focus();
+            materialListView4.EnsureVisible(materialListView4.Items.Count - 1);
+        }
+
+        private void materialFlatButton11_Click(object sender, EventArgs e)
+        {
+            if (checkText(materialSingleLineTextField4.Text)) materialListView4.Items.Insert(materialListView4.Items.IndexOf(materialListView4.SelectedItems[0]), materialSingleLineTextField4.Text);
+        }
+
+        private void materialFlatButton10_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < materialListView4.SelectedItems.Count; i++)
+                materialListView4.Items.Remove(materialListView4.SelectedItems[i]);
+        }
+
+        private void materialSingleLineTextField4_Enter(object sender, EventArgs e)
+        {
+            materialSingleLineTextField4.Text = "";
+        }
+
+        private void materialFlatButton9_Click(object sender, EventArgs e)
+        {
+            materialListView3.Clear();
+            materialListView3.Columns.Add("DISK");
+            materialListView3.Columns[0].Width = 85;
+            materialListView3.Columns.Add("MOVE");
+            materialListView3.Columns[1].Width = 85;
+            if (checkText(materialSingleLineTextField3.Text) == false)
+            {
+                materialLabel3.Text = "ERROR TIME";
+                return;
+            }
+            if (materialListView4.Items.Count <= 0)
+            {
+                materialLabel3.Text = "ERROR DISK LENGTH";
+                return;
+            }
+            int T = int.Parse(materialSingleLineTextField3.Text);
+            int[] D = new int[materialListView4.Items.Count];
+            int i, j;
+            for (i = 0; i < D.Length; i++)
+                D[i] = int.Parse(materialListView4.Items[i].Text);
+            DiskManagement diskManagementFIFO = new DiskManagement(D, T);
+            diskManagementFIFO.diskManagementFIFO();
+            for (i = 0; i < D.Length; i++)
+            {
+                materialListView3.Items.Add(parseText(diskManagementFIFO.cyVisit[i]));
+                materialListView3.Items[i].SubItems.Add(parseText(diskManagementFIFO.moveNum[i]));
+            }
+            materialLabel4.Text = $"MOVELENGTH={diskManagementFIFO.moveLength};TIME={diskManagementFIFO.time}MS;AVERAGELENGTH={diskManagementFIFO.averageLength}";
+        }
+
+        private void materialFlatButton8_Click(object sender, EventArgs e)
+        {
+            materialListView3.Clear();
+            materialListView3.Columns.Add("DISK");
+            materialListView3.Columns[0].Width = 85;
+            materialListView3.Columns.Add("MOVE");
+            materialListView3.Columns[1].Width = 85;
+            if (checkText(materialSingleLineTextField3.Text) == false)
+            {
+                materialLabel3.Text = "ERROR TIME";
+                return;
+            }
+            if (materialListView4.Items.Count <= 0)
+            {
+                materialLabel3.Text = "ERROR DISK LENGTH";
+                return;
+            }
+            int T = int.Parse(materialSingleLineTextField3.Text);
+            int[] D = new int[materialListView4.Items.Count];
+            int i, j;
+            for (i = 0; i < D.Length; i++)
+                D[i] = int.Parse(materialListView4.Items[i].Text);
+            DiskManagement diskManagementSSTF = new DiskManagement(D, T);
+            diskManagementSSTF.diskManagementSSTF();
+            for (i = 0; i < D.Length; i++)
+            {
+                materialListView3.Items.Add(parseText(diskManagementSSTF.cyVisit[i]));
+                materialListView3.Items[i].SubItems.Add(parseText(diskManagementSSTF.moveNum[i]));
+            }
+            materialLabel4.Text = $"MOVELENGTH={diskManagementSSTF.moveLength};TIME={diskManagementSSTF.time}MS;AVERAGELENGTH={diskManagementSSTF.averageLength}";
+        }
+
+        private void materialFlatButton7_Click(object sender, EventArgs e)
+        {
+            materialListView3.Clear();
+            materialListView3.Columns.Add("DISK");
+            materialListView3.Columns[0].Width = 85;
+            materialListView3.Columns.Add("MOVE");
+            materialListView3.Columns[1].Width = 85;
+            if (checkText(materialSingleLineTextField3.Text) == false)
+            {
+                materialLabel3.Text = "ERROR TIME";
+                return;
+            }
+            if (materialListView4.Items.Count <= 0)
+            {
+                materialLabel3.Text = "ERROR DISK LENGTH";
+                return;
+            }
+            int T = int.Parse(materialSingleLineTextField3.Text);
+            int[] D = new int[materialListView4.Items.Count];
+            int i, j;
+            for (i = 0; i < D.Length; i++)
+                D[i] = int.Parse(materialListView4.Items[i].Text);
+            DiskManagement diskManagementELEVU = new DiskManagement(D, T);
+            diskManagementELEVU.diskManagementELEVU();
+            for (i = 0; i < D.Length; i++)
+            {
+                materialListView3.Items.Add(parseText(diskManagementELEVU.cyVisit[i]));
+                materialListView3.Items[i].SubItems.Add(parseText(diskManagementELEVU.moveNum[i]));
+            }
+            materialLabel4.Text = $"MOVELENGTH={diskManagementELEVU.moveLength};TIME={diskManagementELEVU.time}MS;AVERAGELENGTH={diskManagementELEVU.averageLength}";
+
+        }
+
+        private void materialFlatButton13_Click(object sender, EventArgs e)
+        {
+            materialListView3.Clear();
+            materialListView3.Columns.Add("DISK");
+            materialListView3.Columns[0].Width = 85;
+            materialListView3.Columns.Add("MOVE");
+            materialListView3.Columns[1].Width = 85;
+            if (checkText(materialSingleLineTextField3.Text) == false)
+            {
+                materialLabel3.Text = "ERROR TIME";
+                return;
+            }
+            if (materialListView4.Items.Count <= 0)
+            {
+                materialLabel3.Text = "ERROR DISK LENGTH";
+                return;
+            }
+            int T = int.Parse(materialSingleLineTextField3.Text);
+            int[] D = new int[materialListView4.Items.Count];
+            int i, j;
+            for (i = 0; i < D.Length; i++)
+                D[i] = int.Parse(materialListView4.Items[i].Text);
+            DiskManagement diskManagementELEVD = new DiskManagement(D, T);
+            diskManagementELEVD.diskManagementELEVD();
+            for (i = 0; i < D.Length; i++)
+            {
+                materialListView3.Items.Add(parseText(diskManagementELEVD.cyVisit[i]));
+                materialListView3.Items[i].SubItems.Add(parseText(diskManagementELEVD.moveNum[i]));
+            }
+            materialLabel4.Text = $"MOVELENGTH={diskManagementELEVD.moveLength};TIME={diskManagementELEVD.time}MS;AVERAGELENGTH={diskManagementELEVD.averageLength}";
+
+        }
     }
 }
